@@ -14,10 +14,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Assign number in num1  and print out
 
 ```{r}
-num1 <- 
+num1 <- 123
 
 ## print num1
-print()  
+print(num1)  
+
+## Ctlr + Shift + Enter
 ```
 
 ## Assign alphabet in alpha1 and print out
@@ -320,13 +322,13 @@ summary(data)
 *head*
 
 ```{r}
-head()
+head(mtcars, 2)
 ```
 
 *tail*
 
 ```{r}
-tail()
+tail(mtcars, 4)
 ```
 
 ## Extract Data
@@ -337,12 +339,12 @@ tail()
 > Extract first two rows and first two columns
 
 ```{r}
-data[]
+data[1:2, 1:2]
 ```
 > Extract 2nd row and all columns
 
 ```{r}
-data[,]
+data
 ```
 
 > Extract 3rd row with 2nd and 4th column
@@ -354,13 +356,13 @@ data[, c()]
 > Extract 2nd and 4th row with 2nd, 3rd and 4th column
 
 ```{r}
-data[c(), c()]
+data[c(2,4), c(2,3,4)]
 ```
 
 # Your Turn 4
 - Extract name and age column
 - Extract 2nd row
-- Extract 3rd and 4th row and name, gender,age column
+- Extract 3rd and 4th row and name, gender, age column
 
 ```{r}
 
@@ -380,7 +382,7 @@ data
 - Add "blood_group" column to the dataframe
 
 ```{r}
-data$blood_group <- c()
+data$blood_group <- c("A+","B+","AB-","O+","A-")
 data
 ```
 
@@ -429,10 +431,19 @@ merge(prof_data, final_data, by = "name")
 - name() function gives the name of the dataframe column
 
 ```{r}
-names(final_data)[names(final_data)=="name"] <- "first_name"
+names(final_data)[names(final_data)=="hello"] <- "first_name"
 final_data
+
+
+# names(final_data)
+# 
+# names(final_data)=="name"
+
 ```
 
+```{r}
+sum(data$age)
+```
 
 ## Function
 
