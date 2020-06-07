@@ -1,6 +1,5 @@
 ---
 title: "Data Analysis with R"
-author: "Binod"
 date: "6/6/2020"
 output: html_document
 ---
@@ -10,7 +9,130 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r}
+## Pipes
 
+Makes uses of %>% (Ctrl + Shift + M)
+
+
+## dplyr
+
+```{r}
+library(dplyr)
+```
+
+
+### Load data
+
+```{r}
+library(readr)
+
+gapminder <- ("gapminder")
+
+gapminder
+```
+
+### Select
+
+```{r}
+country_gdp_year <- gapminder
+```
+
+
+### Filter
+
+```{r}
+gapminder_asia <- gapminder %>%
+filter(continent == "Asia")
+
+
+gapminder_asia 
+```
+
+
+### Your Turn - 01
+
+> Display country-wise, annual life expectancy of Europe
+
+```{r}
+lifeexp_year_europe <- gapminder
+
+
+lifeexp_year_europe
+```
+
+
+## Mutate
+
+```{r}
+gapminder_total_gdp <- gapminder %>%
+  (gdp = gdpPercap * pop)
+
+gapminder_total_gdp 
+```
+
+## Your Turn - 02
+
+> Find each countries in Asia with life expectancy
+in 2007 and rank of country's life expectancy.
+
+```{r}
+asia_lifeExp <- gapminder
+
+
+asia_lifeExp
+```
+
+## Group By
+
+```{r}
+gapminder_group_by <- gapminder %>%
+  filter(year == 2007) 
+
+gapminder_group_by
+```
+
+
+## Arrange 
+
+
+```{r}
+## ascending order
+
+gapminder_asc <- gapminder %>% 
+  filter(year == 2007)
+
+gapminder_asc
+```
+
+
+```{r}
+# descending order
+gapminder_asc <- gapminder %>%
+filter(year == 2007) 
+
+gapminder_asc 
+```
+
+
+## Your Turn - 03
+
+> Find countries in Asia with low ranked gdpPercap in 1992
+
+```{r}
+asia_gdpPercap_1992 <- gapminder 
+
+
+
+asia_gdpPercap_1992 # print value
+```
+
+
+## Summarize
+
+```{r}
+gampinder_sum <- gapminder %>%
+filter(year == 2007) %>%
+group_by(continent) %>%
+         (meanlife = mean(lifeExp))
 ```
 
