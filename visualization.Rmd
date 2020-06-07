@@ -5,7 +5,11 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
 ```
 
 
@@ -14,12 +18,131 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(ggplot2)
 library(dplyr)
+library(readr)
+
+## Ctrl + Shift + Enter
 ```
 
 
 ## Load Data
 
 ```{r}
+province_status <- read_csv("province_status.csv")
+
+province_status
+```
+
+## Quick Viz
+
+```{r}
+ggplot(province_status, aes(x = province, y = count)) +
+  geom_col()
+```
+### Highest Cases by Province
+
+```{r}
+province_status$province <- as.factor(province_status$province)
+
+province_status %>% 
+  filter(type == "cases") %>% 
+  ggplot(aes(x = province, y = count, fill = province)) +
+  geom_col() +
+  ggtitle("Highest Covid-19 Cases by Province") +
+  guides(fill = F)
+
 
 ```
+
+
+### Highest Recovered by Province
+
+```{r}
+
+province_status %>% 
+  filter(type == "recovered") %>% 
+  ggplot(aes(x = province, y = count, fill = province)) +
+  geom_col() +
+  ggtitle("Highest Covid-19 Recovered by Province") +
+  guides(fill = F)
+```
+
+### Highest Deaths by Province
+
+```{r}
+province_status %>% 
+  filter(type == "deaths") %>% 
+  ggplot(aes(x = "", y = count, fill = province)) +
+  geom_col(width = 1) +
+  coord_polar(start = 0, direction = 1, "y") +
+  ggtitle("Highest Covid-19 Deaths by Province") +
+  guides(fill = F)
+```
+
+## Summarise Data
+
+```{r}
+province_status %>% 
+  group_by(province) %>% 
+  summarise(total = sum(count))
+  
+province_status %>% 
+  # filter(type == "cases") %>% 
+  summarise(total = sum(count))
+```
+
+```{r}
+province_status %>% 
+  filter(type == "recovered") %>% 
+  ggplot(aes(x = count )) +
+  geom_histogram(stat = "bin", binwidth = 20)
+```
+
+### Scatterplot
+
+```{r}
+cars %>% 
+  ggplot(aes(x = speed, y = dist)) +
+  geom_point()
+
+```
+
+### Boxplot
+
+```{r}
+gapminder %>% 
+  filter(year == 2007) %>%
+  ggplot(aes(x = continent, y = lifeExp)) +
+  geom_boxplot()
+```
+
+```{r}
+district_status <- read_csv("district_status.csv")
+
+library(tidyr)
+
+  
+```
+## Top 10 district based on covid19 cases
+
+
+
+```{r}
+library(tidyverse)
+
+district_status$district <- factor(district_status$district)
+
+# highest_cases_df <- 
+district_status %>% 
+  drop_na() %>% 
+  filter(type == "cases") %>% 
+  arrange(desc(count)) %>% 
+  top_n(count, n = 10) %>%
+  # mutate(n = fct_reorder(district, count)) %>% 
+  ggplot(aes(x = district, y = count, fill = district)) +
+  geom_col()
+
+```
+
+
+
 

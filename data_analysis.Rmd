@@ -1,13 +1,18 @@
 ---
 title: "Data Analysis with R"
 date: "6/6/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = TRUE,
+	warning = TRUE
+)
 ```
-
 
 ## Pipes
 
@@ -26,7 +31,7 @@ library(dplyr)
 ```{r}
 library(readr)
 
-gapminder <- ("gapminder")
+gapminder <- read_csv("gapminder.csv")
 
 gapminder
 ```
@@ -34,7 +39,8 @@ gapminder
 ### Select
 
 ```{r}
-country_gdp_year <- gapminder
+country_gdp_year <- gapminder %>% 
+  select()
 ```
 
 
@@ -64,8 +70,7 @@ lifeexp_year_europe
 ## Mutate
 
 ```{r}
-gapminder_total_gdp <- gapminder %>%
-  (gdp = gdpPercap * pop)
+gapminder_total_gdp <- gapminder 
 
 gapminder_total_gdp 
 ```
@@ -130,9 +135,6 @@ asia_gdpPercap_1992 # print value
 ## Summarize
 
 ```{r}
-gampinder_sum <- gapminder %>%
-filter(year == 2007) %>%
-group_by(continent) %>%
-         (meanlife = mean(lifeExp))
+gampinder_sum <- gapminder
 ```
 
