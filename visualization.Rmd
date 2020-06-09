@@ -30,14 +30,24 @@ library(readr)
 province_status <- read_csv("province_status.csv")
 
 province_status
+
+
 ```
 
 ## Quick Viz
 
 ```{r}
-ggplot(province_status, aes(x = province, y = count)) +
-  geom_col()
+
+library(ggplot2)
+
+province_status %>%
+filter(type  == "deaths") %>% 
+ggplot(aes(x = province, y = count) ) +
+  geom_bar(stat = "identity")
 ```
+
+
+
 ### Highest Cases by Province
 
 ```{r}

@@ -112,10 +112,13 @@ gapminder_asc
 
 ```{r}
 # descending order
-gapminder_asc <- gapminder %>%
-filter(year == 2007) 
+filter(gapminder, year == 2007) 
+select(gap, country, lifeExp)
 
-gapminder_asc 
+
+gapminder %>% filter(year == 2007) %>% select(country, lifeExp) 
+
+gap_sel
 ```
 
 
@@ -125,8 +128,6 @@ gapminder_asc
 
 ```{r}
 asia_gdpPercap_1992 <- gapminder 
-
-
 
 asia_gdpPercap_1992 # print value
 ```
