@@ -1,0 +1,60 @@
+---
+title: "Untitled"
+author: "Binod"
+date: "6/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Cltr + Alt + I
+
+```{r}
+library(tidyr)
+
+
+table4a
+```
+```{r}
+
+a <- c("1", "2", "3")
+
+
+df$year <- as.numeric(df$year)
+
+```
+
+```{r}
+library(readr)
+library(janitor)
+
+
+covid_df <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+
+library(dplyr)
+
+covid_df <- covid_df %>% 
+   tidyr::pivot_longer(
+      cols = 5:ncol(covid_df),
+      names_to = "date",
+      values_to = "cases_confirmed"
+    ) %>%
+   dplyr::mutate( date = lubridate::mdy(date)) %>%
+   janitor::clean_names()
+
+
+library(ggplot2)
+
+
+
+covid_cases %>% 
+  filter(country_region == "Nepal") %>%
+  ggplot(aes(x = date, y = confirmed_cases)) +
+  geom_line(na.rm = T, stat = "identity")
+  
+?geom_line
+
+```
+
